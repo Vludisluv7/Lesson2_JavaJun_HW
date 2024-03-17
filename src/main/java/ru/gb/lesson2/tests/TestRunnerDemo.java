@@ -1,29 +1,43 @@
-package ru.gb.lesson2.tests;
+import ru.gb.lesson2.tests.*;
 
-public class TestRunnerDemo {
+import static ru.gb.lesson2.tests.TestRunner.run;
 
-  // private никому не видно
-  // default (package-private) внутри пакета
-  // protected внутри пакета + наследники
-  // public всем
+public static class SampleTestClass {
 
-  public static void main(String[] args) {
-    TestRunner.run(TestRunnerDemo.class);
-  }
+    @BeforeAll
+    public static void initAll() {
+        System.out.println("BeforeAll tests");
+    }
 
-//  @Test(order = 3)
-  private void test1() {
-    System.out.println("test1");
-  }
+    @AfterAll
+    public static void cleanUpAll() {
+        System.out.println("AfterAll tests");
+    }
 
-//  @Test(order = 1)
-  void test2() {
-    System.out.println("test2");
-  }
+    @BeforeEach
+    public static void init() {
+        System.out.println("BeforeEach test");
+    }
 
-//  @Test
-  void test3() {
-    System.out.println("test3");
-  }
+    @AfterEach
+    public static void cleanUp() {
+        System.out.println("AfterEach test");
+    }
 
+    @Test
+    public static void testMethod1() {
+        System.out.println("Running test method 1");
+    }
+
+    @Test
+    public static void testMethod2() {
+        System.out.println("Running test method 2");
+    }
+
+    // Add more test methods as needed
+}
+
+// Main method to run tests
+public static void main(String[] args) {
+    run(SampleTestClass.class);
 }
